@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('isAdmin');
+        $this->middleware('isAdmin')->except('show');
     }
 
     /**
@@ -64,7 +64,8 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $articles = $category->articles()->get();
-        $categories = Category::all();
+        
+        $categories = Category::get();
 
         return view('categories', ['articles' => $articles, 'categories' => $categories]);
     }

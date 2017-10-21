@@ -16,7 +16,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::get();
+        $articles->load('categories')->load('user');
         $categories =  Category::all();
 
         return view('home', ['articles' => $articles, 'categories' => $categories]);

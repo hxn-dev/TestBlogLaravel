@@ -5,12 +5,12 @@
 		<div class="col-sm-12 col-md-12">
 			<article>
 				<h2>
-					<a href="{{ route('article.index', ['id' => $article->id ]) }}">{{ $article->title }}</a>
+					<a href="{{ route('article.show', ['id' => $article->id ]) }}">{{ $article->title }}</a>
 				</h2>
 				<p>
 					<small>Section :
 						@foreach($article->categories as $category)
-							<a href="{{ route('category.index', ['id' => $category->id]) }}">{{ $category->name }}</a>
+							<a href="{{ route('category.show', ['id' => $category->id]) }}">{{ $category->name }}</a>
 						@endforeach
 						par <a href="#">{{ $article->user->name }}</a>
 						Le {{ Carbon\Carbon::parse($article->created_at)->format('d/m/Y à h:i:s') }}</small>
