@@ -21,8 +21,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::get();
-        $articles->load('categories')->load('user');
+        $articles = Article::with(['categories', 'user']);
 
         return view('article.index', ['articles' => $articles]);
     }
@@ -67,9 +66,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $article = Article::find($id);
-        //$article->with('categories')->with('user');
-        $article->load('categories')->load('user');
+        $article = Article::with(['categories', 'user'])->findOrFail($id);
 
         return view('article.show', ['article' => $article]);
     }

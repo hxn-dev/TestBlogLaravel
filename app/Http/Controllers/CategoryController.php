@@ -63,8 +63,15 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $articles = $category->articles()->get();
-        
+        // 10 DB Queries
+        //$articles = $category->articles()->get();
+
+        // 6 DB Queries
+        $cat_id = $category->id;
+        $articles = Article::with(['categories', 'user'])->whereHas('categories', function($query) use($cat_id){
+            $query->where('categories.id', '=', $cat_id);
+        })->get();
+
         $categories = Category::get();
 
         return view('categories', ['articles' => $articles, 'categories' => $categories]);
