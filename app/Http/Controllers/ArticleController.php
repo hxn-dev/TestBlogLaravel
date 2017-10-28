@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\ArticleValidator;
 
 class ArticleController extends Controller
 {
@@ -21,7 +22,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::with(['categories', 'user']);
+        $articles = Article::with(['categories', 'user'])->get();
 
         return view('article.index', ['articles' => $articles]);
     }
@@ -45,8 +46,9 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArticleValidator $request)
     {
+
         $article = Article::create([
             'title' => $request->get('title'),
             'slug' => str_slug($request->get('slug')),
@@ -92,7 +94,7 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ArticleValidator $request, $id)
     {
         $article = Article::findOrFail($id);
         $article->update($request->all());

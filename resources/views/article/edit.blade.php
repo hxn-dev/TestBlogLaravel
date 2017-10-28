@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-        {!! Form::model($article, ['url' => route('article.update', $article), 'method' => 'PUT']) !!}
+    {!! Form::model($article, ['url' => route('article.update', $article), 'method' => 'PUT']) !!}
+
+    @include('layouts.errors')
 
     <div class="form-group">
         {!! Form::label("title", "Titre de l'article") !!}
