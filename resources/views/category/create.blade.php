@@ -3,8 +3,10 @@
 @section('content')
     {!! Form::model($category, ['route' => 'category.store', 'method' => 'POST']) !!}
 
+    @include('layouts.errors')
+
     <div class="form-group">
-        {!! Form::label("name", "Titre de la catégorie") !!}
+        {!! Form::label("name", "Nom de la catégorie") !!}
         {!! Form::text('name', $category->name, ['class' => 'form-control']) !!}
     </div>
 

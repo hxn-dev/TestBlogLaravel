@@ -13,7 +13,7 @@ Pas besoin de base donnée, le driver utilisé est **sqlite**, tout est donc sto
 
 Deux utilisateurs sont déjà présent dans la base de donnée, seul l'admin possède le droit d'ajouter des catégories
 * User, email : useruser@test.com - mot de passe : useruser
-* Admin, email: adminadmin@test.com - mot de passe : adminadmin
+* Admin, email: admin@test.com - mot de passe : adminadmin
 
 <br>
 

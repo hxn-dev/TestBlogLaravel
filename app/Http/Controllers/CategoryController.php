@@ -6,6 +6,7 @@ use App\Article;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Http\Requests\CategoryValidator;
 
 class CategoryController extends Controller
 {
@@ -45,7 +46,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryValidator $request)
     {
         $category = Category::create([
             'name' => $request->get('name'),
