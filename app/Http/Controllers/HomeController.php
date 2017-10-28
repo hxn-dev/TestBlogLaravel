@@ -17,9 +17,8 @@ class HomeController extends Controller
     public function index()
     {
         $articles = Article::with(['categories', 'user'])->get();
-        $categories =  Category::all();
 
-        return view('home', ['articles' => $articles, 'categories' => $categories]);
+        return view('home', ['articles' => $articles]);
     }
 
     public function profile()

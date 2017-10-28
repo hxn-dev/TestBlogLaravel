@@ -61,20 +61,20 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($slug)
     {
         // 10 DB Queries
         //$articles = $category->articles()->get();
 
         // 6 DB Queries
-        $cat_id = $category->id;
-        $articles = Article::with(['categories', 'user'])->whereHas('categories', function($query) use($cat_id){
-            $query->where('categories.id', '=', $cat_id);
+        $articles = Article::with(['categories', 'user'])->whereHas('categories', function($query) use($slug){
+            $query->where('categories.slug', '=', $slug);
         })->get();
 
-        $categories = Category::get();
+        if($articles->isEmpty())
+            abort(404);
 
-        return view('categories', ['articles' => $articles, 'categories' => $categories]);
+        return view('home', ['articles' => $articles]);
     }
 
 }

@@ -18,16 +18,15 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 
-Route::resource('article', 'ArticleController');
+// Temporary.. Rebinding show with slug wildcard 
+Route::get('article/{slug}', 'ArticleController@show')->where(['slug' => '[a-z -]+'])->name('article.show');
+Route::get('category/{slug}', 'CategoryController@show')->where(['slug' => '[a-z -]+'])->name('category.show');
 
-Route::resource('category', 'CategoryController', [
-    'parameters' => [
-        'show' => 'slug'
-    ]
-]);
+Route::resource('article', 'ArticleController', ['except' => ['show']]);
+Route::resource('category', 'CategoryController', ['except' => ['show']]);
+
 
 Route::get('/profile', 'HomeController@profile')->name('user.show');
-
 
 
 Auth::routes();
